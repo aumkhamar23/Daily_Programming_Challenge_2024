@@ -1,0 +1,23 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int findMissingNumber(vector<int>& arr, int n) {
+    int total_sum = n * (n + 1) / 2;  // Sum of first n natural numbers
+    int array_sum = 0;
+    
+    for (int num : arr) {
+        array_sum += num;
+    }
+    
+    return total_sum - array_sum;  // The missing number
+}
+
+int main() {
+    vector<int> arr = {1, 2, 4, 5};
+    int n = 5;  // The size of the original array should be n
+
+    cout << "Missing Number: " << findMissingNumber(arr, n) << endl;
+    
+    return 0;
+}
