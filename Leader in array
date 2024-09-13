@@ -1,0 +1,40 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+vector<int> findLeaders(const vector<int>& arr) {
+    int n = arr.size();
+    vector<int> leaders;
+    
+    // The last element is always a leader
+    int maxFromRight = arr[n-1];
+    leaders.push_back(maxFromRight);
+    
+    // Traverse the array from second last to the first element
+    for (int i = n-2; i >= 0; i--) {
+        if (arr[i] > maxFromRight) {
+            maxFromRight = arr[i];
+            leaders.push_back(arr[i]);
+        }
+    }
+    
+    // Reverse the leaders vector to maintain the original order of appearance
+    reverse(leaders.begin(), leaders.end());
+    
+    return leaders;
+}
+
+int main() {
+    vector<int> arr = {16, 17, 4, 3, 5, 2};
+    
+    vector<int> leaders = findLeaders(arr);
+    
+    // Output the leader elements
+    cout << "Leaders: ";
+    for (int leader : leaders) {
+        cout << leader << " ";
+    }
+    cout << endl;
+    
+    return 0;
+}
