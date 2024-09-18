@@ -1,0 +1,53 @@
+/*
+*Day 10 of 30* 🗓️
+
+*Problem* : Group Anagrams
+You are given an array of strings strs[]. Your task is to group all the strings that are anagrams of each other. An anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.
+
+*Input* :
+strs[] = ["eat", "tea", "tan", "ate", "nat", "bat"]
+
+*Output* :
+[["eat", "tea", "ate"], ["tan", "nat"], ["bat"]]
+*/
+
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+#include <algorithm>
+
+using namespace std;
+
+vector<vector<string>> groupAnagrams(vector<string>& strs) {
+    unordered_map<string, vector<string>> anagramMap;
+    
+    for (string str : strs) {
+        string sortedStr = str;
+        sort(sortedStr.begin(), sortedStr.end());
+        anagramMap[sortedStr].push_back(str);
+    }
+    
+    vector<vector<string>> result;
+    
+    for (auto& entry : anagramMap) {
+        result.push_back(entry.second);
+    }
+    
+    return result;
+}
+
+int main() {
+    vector<string> strs = {"eat", "tea", "tan", "ate", "nat", "bat"};
+    
+    vector<vector<string>> groupedAnagrams = groupAnagrams(strs);
+    
+    for (auto group : groupedAnagrams) {
+        cout << "[ ";
+        for (auto word : group) {
+            cout << word << " ";
+        }
+        cout << "]" << endl;
+    }
+    
+    return 0;
+}
